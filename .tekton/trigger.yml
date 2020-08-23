@@ -1,0 +1,86 @@
+apiVersion: tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: github-push-binding
+spec:
+  params:
+  - name: URL
+    value: $(body.repository.clone_url)
+  - name: REVISION
+    value: $(body.pull_request.head.sha)
+  - name: NAMESPACE
+    value: testapp
+  - name: DEPLOYMENT
+    value: testapp
+
+---
+
+apiVersion: tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: github-push-binding
+params:
+- name: URL
+  description: The repository url to build and deploy.
+- name: REVISION
+  description: The revision to build and deploy.
+- name: NAMESPACE
+  description: The namespace is used by OpenShift's internal image registry to store the built image.
+- name: DEPLOYMENT
+  description: Name of the Deployment and the container name in the Deployment.
+spec:
+  resourcetemplates:
+    - apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: secret-service-account
+      secrets:
+        - name: docker-creds
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        name: pipelinerun-$(uid)
+      spec:
+        serviceAccountName: secret-service-account
+        pipelineRef:
+            name: github-push--pipeline
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: github-push
+
+---
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: github-push
+rules:
+# Permissions for every EventListener deployment to function
+- apiGroups: ["triggers.tekton.dev"]
+  resources: ["eventlisteners", "triggerbindings", "triggertemplates"]
+  verbs: ["get"]
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get", "list", "watch"]
+# Permissions to create resources in associated TriggerTemplates
+- apiGroups: ["tekton.dev"]
+  resources: ["pipelineruns"]
+  verbs: ["create"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: github-push
+subjects:
+- kind: ServiceAccount
+  name: github-push
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: github-push
+

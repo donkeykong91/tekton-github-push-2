@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: EventListener
+serviceAccountName: github-push
+metadata:
+  name: github-push
+spec:
+  triggers:
+      interceptors:
+      - github:
+        eventTypes: ["push"]
+      bindings:
+        name: binding-github-push
+      template:
+        name: template-github-push

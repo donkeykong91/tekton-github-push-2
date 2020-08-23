@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: github-push-pipeline
+spec:
+  tasks: 
+  - name: github-push-task
+    workspaces: 
+    - name: source
+      workspace: pipeline-workspace
+    taskRef:
+      name: the-task
+    runAfter:
+    - git-clone
+  - name: git-clone
+    workspaces:
+    - name: artifacts
+      workspace: pipeline-workspace          
+    taskRef:
+      name: clone-repo
+    params:
+    - name: repository
+      value: $(params.repository)
+    - name: branch
+      value: $(params.branch)
