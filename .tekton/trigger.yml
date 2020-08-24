@@ -40,41 +40,41 @@ spec:
             name: github-push--pipeline
 ---
 
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: github-push
+# apiVersion: v1
+# kind: ServiceAccount
+# metadata:
+#   name: github-push
 
----
+# ---
 
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: github-push
-rules:
-# Permissions for every EventListener deployment to function
-- apiGroups: ["triggers.tekton.dev"]
-  resources: ["eventlisteners", "triggerbindings", "triggertemplates"]
-  verbs: ["get"]
-- apiGroups: [""]
-  resources: ["configmaps"]
-  verbs: ["get", "list", "watch"]
-# Permissions to create resources in associated TriggerTemplates
-- apiGroups: ["tekton.dev"]
-  resources: ["pipelineruns"]
-  verbs: ["create"]
-#
----
+# kind: Role
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: github-push
+# rules:
+# # Permissions for every EventListener deployment to function
+# - apiGroups: ["triggers.tekton.dev"]
+#   resources: ["eventlisteners", "triggerbindings", "triggertemplates"]
+#   verbs: ["get"]
+# - apiGroups: [""]
+#   resources: ["configmaps"]
+#   verbs: ["get", "list", "watch"]
+# # Permissions to create resources in associated TriggerTemplates
+# - apiGroups: ["tekton.dev"]
+#   resources: ["pipelineruns"]
+#   verbs: ["create"]
+# #
+# ---
 
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: github-push
-subjects:
-- kind: ServiceAccount
-  name: github-push
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: github-push
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: github-push
+# subjects:
+# - kind: ServiceAccount
+#   name: github-push
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: Role
+#   name: github-push
 

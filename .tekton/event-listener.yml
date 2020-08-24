@@ -5,9 +5,9 @@ metadata:
   name: github-push
 spec:
   triggers:
-      interceptors:
-      - github:
-        eventTypes: ["push"]
+      # interceptors:
+      # - github:
+      #   eventTypes: ["push"]
       bindings:
         name: binding-github-push
       template:
