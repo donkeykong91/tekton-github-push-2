@@ -8,5 +8,8 @@ spec:
     workspaces: 
     - name: source
       workspace: pipeline-workspace
+    params:
+    - name: URL
+      description: URL of the repository to be cloned.
     taskRef:
       name: the-task
