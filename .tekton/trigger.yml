@@ -4,8 +4,8 @@ metadata:
   name: binding-github-push
 spec:
   params:
-  - name: URL
-    value: "$(event.repository.url)"
+    - name: URL
+      value: "$(event.repository.url)"
 
 ---
 

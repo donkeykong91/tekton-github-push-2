@@ -4,8 +4,8 @@ metadata:
   name: the-task
 spec:
   params: 
-  - name: URL
-    description: URL of the git clone link.
+    - name: URL
+      description: URL of the git clone link.
   steps:
     - name: simple-task
       image: ibmcom/pipeline-base-image

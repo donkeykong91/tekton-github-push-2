@@ -12,7 +12,7 @@ spec:
     - name: source
       workspace: pipeline-workspace
     params:
-    - name: URL
-      value: $(params.URL)
+      - name: URL
+        value: $(params.URL)
     taskRef:
       name: the-task
