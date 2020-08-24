@@ -6,13 +6,13 @@ spec:
   params:
     - name: URL
       description: URL of the repository to be cloned.
+  workspaces: 
+  - name: source
+    workspace: pipeline-workspace
   tasks: 
-  - name: github-push-task
-    workspaces: 
-    - name: source
-      workspace: pipeline-workspace
-    params:
-      - name: URL
-        value: $(params.URL)
-    taskRef:
-      name: the-task
+    - name: github-push-task
+      taskRef:
+        name: the-task
+      params:
+        - name: URL
+          value: $(params.URL)
