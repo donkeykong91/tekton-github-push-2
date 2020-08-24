@@ -5,9 +5,9 @@ metadata:
 spec:
   params:
   - name: URL
-    value: $(event.repository.clone_url)
+    value: "$(event.repository.clone_url)"
   - name: REVISION
-    value: $(event.pull_request.head.sha)
+    value: "$(event.pull_request.head.sha)"
   - name: NAMESPACE
     value: testapp
   - name: DEPLOYMENT

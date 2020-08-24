@@ -1,6 +1,5 @@
 apiVersion: tekton.dev/v1beta1
 kind: EventListener
-serviceAccountName: github-push
 metadata:
   name: github-push
 spec:
