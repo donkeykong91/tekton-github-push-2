@@ -5,7 +5,7 @@ metadata:
 spec:
   params:
   - name: URL
-    value: "$(event.repository.clone_url)"
+    value: "$(event.repository.url)"
 
 ---
 
@@ -13,10 +13,10 @@ apiVersion: tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
   name: template-github-push
-params:
-- name: URL
-  description: The repository url to build and deploy.
 spec:
+  params:
+  - name: URL
+    description: The repository url to build and deploy.
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
