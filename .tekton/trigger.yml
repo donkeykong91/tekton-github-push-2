@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: TriggerBinding
 metadata:
-  name: github-push-binding
+  name: binding-github-push
 spec:
   params:
   - name: URL
@@ -18,7 +18,7 @@ spec:
 apiVersion: tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
-  name: github-push-binding
+  name: template-github-push
 params:
 - name: URL
   description: The repository url to build and deploy.
