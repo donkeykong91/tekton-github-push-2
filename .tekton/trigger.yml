@@ -6,7 +6,7 @@ spec:
   params:
   - name: URL
     value: "$(event.repository.clone_url)"
-    
+
 ---
 
 apiVersion: tekton.dev/v1beta1
@@ -25,3 +25,6 @@ spec:
       spec:
         pipelineRef:
             name: github-push-pipeline
+        params:
+          - name: URL
+            value: $(params.URL)
