@@ -15,8 +15,8 @@ metadata:
   name: template-github-push
 spec:
   params:
-  - name: URL
-    description: The repository url to build and deploy.
+    - name: URL
+      description: The repository url to build and deploy.
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
