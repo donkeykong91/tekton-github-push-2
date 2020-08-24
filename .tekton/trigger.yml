@@ -24,7 +24,7 @@ spec:
         name: pipelinerun-$(uid)-pvc
       spec:
         pipelineRef:
-            name: github-push-pipeline
+          name: github-push-pipeline
         params:
           - name: URL
             value: $(params.URL)
