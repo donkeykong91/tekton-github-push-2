@@ -3,6 +3,9 @@ kind: Pipeline
 metadata:
   name: github-push-pipeline
 spec:
+  params:
+    - name: URL
+      description: URL of the repository to be cloned.
   tasks: 
   - name: github-push-task
     workspaces: 
@@ -10,6 +13,6 @@ spec:
       workspace: pipeline-workspace
     params:
     - name: URL
-      description: URL of the repository to be cloned.
+      value: $(params.URL)
     taskRef:
       name: the-task
