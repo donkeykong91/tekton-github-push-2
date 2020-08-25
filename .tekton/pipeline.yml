@@ -7,9 +7,6 @@ spec:
     - name: URL
       description: URL of the repository to be cloned.
       default: ""
-  workspaces: 
-    - name: source
-      workspace: pipeline-workspace
   tasks: 
     - name: github-push-task
       taskRef:
