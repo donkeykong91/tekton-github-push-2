@@ -11,5 +11,4 @@ spec:
       image: ibmcom/pipeline-base-image
       command: ["/bin/bash", "-c"]
       args:
-        -
-        echo "$(params.URL)"
+        - echo "$(params.URL)"
